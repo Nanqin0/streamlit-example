@@ -1,6 +1,4 @@
 import streamlit as st
-from utilities.AI_API import *
-from utilities.functions import *
 import os
 
 # Ensure there's a folder to save uploaded files
