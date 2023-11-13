@@ -1,11 +1,19 @@
 import streamlit as st
+import PyPDF2
 import os
 
 # Ensure there's a folder to save uploaded files
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Your existing code...
+def convert_pdf_to_text(file_path):
+    # Open the PDF file
+    with open(file_path, 'rb') as file:
+        reader = PyPDF2.PdfFileReader(file)
+        text = ""
+        for page in range(reader.numPages):
+            text += reader.getPage(page).extractText()
+        return text
 
 # Add a section in your Streamlit UI for resume upload
 with st.sidebar:
@@ -15,4 +23,9 @@ with st.sidebar:
         file_path = os.path.join(UPLOAD_FOLDER, uploaded_file.name)
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
+        # Convert the uploaded PDF to text
+        resume_text = convert_pdf_to_text(file_path)
         st.success('File uploaded successfully')
+        st.text_area("Extracted Text", resume_text, height=300)
+
+
