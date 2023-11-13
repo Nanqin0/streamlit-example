@@ -1,7 +1,6 @@
 import streamlit as st
 import boto3
 from utilities.AI_API import *
-import PyPDF2
 import os
 import re
 
