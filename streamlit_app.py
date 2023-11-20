@@ -53,9 +53,9 @@ def extract_skills(resume_text):
 # Streamlit UI
 st.header("Resume Analysis Tool")
 
-with st.sidebar:
-    st.header("Upload Your Resume")
-    uploaded_file = st.file_uploader("Choose a file", type='pdf')
+with tab_resume:
+    st.caption("Based on your resume, I would know what skills you have and help you improve.")
+    uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         file_path = os.path.join(UPLOAD_FOLDER, uploaded_file.name)
         with open(file_path, "wb") as f:
